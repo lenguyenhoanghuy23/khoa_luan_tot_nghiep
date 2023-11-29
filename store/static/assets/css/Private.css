@@ -1,0 +1,82 @@
+.header__logo a img {
+    width: 150px;
+    height: 50px;
+}
+
+.d-block {
+    height: 420px;
+}
+
+.header__top__right__language ul li {
+    list-style: none;
+}
+
+.header__menu ul li.active a {
+    color: #7fad39;
+}
+
+.product__pagination a.active {
+    background-color: #7fad39;
+}
+
+.header__top__right__language ul li:hover {
+    background: #dff5cb;
+}
+
+.product__pagination,
+.blog__pagination {
+    padding-top: 10px;
+    padding-left: 240px;
+}
+
+.site-btnseach {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    /* display: inline-block; */
+    padding: 13px 18px 12px;
+    background: #7fad39;
+    position: relative;
+    right: 18px;
+    border: none;
+}
+
+.showchars {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.banner__pic img {
+    width: 1366px;
+    height: 240px
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.zoom:hover {
+    transform: scale(1.05);
+}
+
+.featured__item__pic {
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+    background-position: center center;
+}
+
+
+/* border radius image  */
+
+.product__item__pic {
+    height: 266px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 25px;
+}

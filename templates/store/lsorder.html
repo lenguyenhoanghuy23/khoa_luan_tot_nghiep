@@ -1,0 +1,146 @@
+{% extends 'store/main.html' %}
+{% block content %}
+{% load static %}
+ <!-- Breadcrumb Section Begin -->
+ <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %} ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>THEO DÕI ĐƠN HÀNG</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'index' %}">Trang Chủ</a>
+                        <span>sản phẩm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad"id ="cartList" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12"> 
+                {% if cartorder %}
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">mã đơn hàng</th>
+                                    <th>email</th>
+                                    <th>tình trạng </br>đơn hàng</th>
+                                    <th>thanh toán</th>
+                                    <th>Tổng Giá</th>
+                                    <th>ngày đặt</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                    {% for item in cartorder %}
+                                    <tr>
+                                        
+                                        <td >
+                                            {{item.id}} 
+                                        </td>
+                                        <td >
+                                            {{item.user.email}} 
+                                        </td>
+                                    
+                                        {% if item.order_status == "Confirmed"%}
+                                            <td>
+                                                Đã được xác nhận 
+                                            </td>   
+                                        {% elif item.order_status == "sender ready" %}
+                                            <td>
+                                                người gửi chuẩn bị hàng 
+                                            </td>  
+                                        {% elif item.order_status == "order has been delivered" %}
+                                            <td>
+                                                đơn hàng đã được </br> bàn giao cho đơn </br> vị vận chuyển
+                                            </td>  
+                                        {% elif item.order_status == "shipping" %}
+                                            <td>
+                                                đang giao hàng
+                                            </td>  
+
+                                        {% elif item.order_status == "delivered" %}
+                                            <td>
+                                                đã giao hàng
+                                            </td>  
+                                        {% endif %} 
+
+                                    
+                                        
+                                        {% if item.paid_status == 0 %}
+                                        <td >
+                                            chưa thanh toán
+                                        </td>
+                                        {% elif item.paid_status == 1 %}
+                                        <td >
+                                            đã thanh toán
+                                        </td>
+                                        {% endif %}
+
+                                        <td >
+                                            {{item.total_amt}} VND 
+                                            <p id="demo"></p>
+                                        </td>
+                                        <td class="shoping__cart__item__close">
+                                       {{item.order_dt|date:"d/m/Y" }} </br>
+                                       {{item.order_dt|time }} 
+                                      
+                                        </td>
+                                        
+                                        {% if item.order_status == "Confirmed"  %}
+                                            <td>
+                                                <a class="btn btn-outline-danger delete-item" href ="/shipdel/{{item.id}}" >hủy đơn <i class="fas fa-times"></i></a>
+                                            
+                                            </td>   
+                                        {% elif item.order_status == "sender ready" %}
+                                            <td>
+                                                <a class="btn btn-outline-danger delete-item" href ="/shipdel/{{item.id}}" >hủy đơn <i class="fas fa-times"></i></a>
+                                            </td>  
+                                        {% else %}
+                                        <td>
+                                            <button type="button" disabled class="btn btn-outline-danger delete-item">hủy đơn <i class="fas fa-times"></i></button>
+                                        </td> 
+                                        {% endif %}
+                                    </tr>
+
+                                    
+                                    {% endfor %}
+                               
+                            </tbody>
+                            
+                        </table>
+                        
+                    </div>
+                {% else %}
+
+                <td>
+                <h3>bạn chưa có đơn hàng nào</h3>
+                </td>
+                
+                {% endif %}
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    {% comment %} <a href="{% url 'product' %}" class="primary-btn cart-btn">CONTINUE SHOPPING <i class="fas fa-forward"></i></a>
+                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class=""><i class="fas fa-spinner"></i></span>
+                        Upadate Cart</a>  {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Shoping Cart Section End -->
+
+{% endblock %}

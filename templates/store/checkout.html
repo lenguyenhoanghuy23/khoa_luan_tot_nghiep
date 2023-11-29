@@ -1,0 +1,109 @@
+{% extends 'store/main.html' %} {% block content %} {% load static %}
+<!-- Checkout Section Begin -->
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+  <div class="container">
+    <div class="checkout__form">
+      <h4>THÔNG TIN THANH TOÁN</h4>
+      <form  method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="row">
+              <div class="col-lg-6">
+                <div
+                  class="checkout__input"
+                  data-validate="Nhập Username or Email"
+                >
+                  <p>Họ Tên<span>*</span></p>
+                  <input type="text" name="lastname" id="lastname" required placeholder="Họ Tên" />
+                </div>
+              </div>
+            </div>
+            <div class="checkout__input">
+              <p>Địa Chỉ<span>*</span></p>
+              <input
+                type="text"
+                name="address"
+                placeholder="địa chỉ giao hàng"
+                class="checkout__input__add"
+                required
+              />
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="checkout__input">
+                  <p>Số Điện Thoại<span>*</span></p>
+                  <input type="number" maxlength="10" name="phone"required />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="checkout__input">
+                  <p>Email<span>*</span></p>
+                  <input type="text"  name="email" required/>
+                </div>
+              </div>
+            </div>
+            <div class="checkout__input__checkbox">
+              <label  cols="70" for="diff-acc"> Gửi đến một địa chỉ khác? </label>
+            </div>
+            <div class="checkout__input">
+              <p>Ghi chú đơn hàng <span></span></p>
+              <textarea
+                name="description"
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: những lưu ý đặc biệt khi giao hàng."
+                rows="9" cols="70"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6">
+            <div class="checkout__order">
+              <h4>Đơn hàng của bạn</h4>
+              <div class="checkout__order__products">
+                Sản Phẩm <span>Giá Tiền</span>
+              </div>
+
+              <ul>
+                {% for product_id,item in cart_data.items %}
+                <li>
+                  {{item.name|truncatechars:25}} x {{item.qty}}
+                  <span>{{total}} đ</span>
+                </li>
+                
+                {% endfor %}
+              </ul>
+
+            
+              <div class="checkout__order__total">
+                tổng <span>{{total_amt}} đ</span>
+              </div>
+              <div class="checkout__order__total">
+                <h5>
+                  Tiền mặt
+                </h5>
+                <p>
+                  Thanh toán tiền mặt khi nhận hàng. 
+                  Bạn cần được hỗ trợ ngay? Chỉ cần FreshFruits@gmail.com, 
+                  hoặc gọi số điện thoại 0123456789 (8-21h cả T7,CN). Đội ngũ FreshFruits 
+                  luôn sẵn sàng hỗ trợ bạn bất kì lúc nào.
+                </p>
+              </div>
+              <div class="checkout__input__checkbox"></div>
+                {% if request.session.cartdata|length < 1 %}
+                
+                {% else %}
+                <button class="site-btn">đặt Hàng</button>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+ 
+{% endblock %}

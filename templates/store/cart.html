@@ -1,0 +1,119 @@
+{% extends 'store/main.html' %}
+{% block content %}
+{% load static %}
+<!-- Shoping Cart Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %} ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>GIỎ HÀNG</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'index' %}">Trang Chủ</a>
+                        <span>Giỏ hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="shoping-cart spad" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+
+                    
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shoping__product">Sản Phẩm</th>
+                                <th>Giá</th>
+                                <th>Số Lượng</th>
+                                <th>tạm tính</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% if cart_data.items %}
+                            {% for product_id,item in cart_data.items %}
+                            <tr>
+                                <td class="shoping__cart__item">
+                                   
+                                    <a href="/details/{{product_id}}">
+                                        <img src="{{item.image}}" alt="" style="width:100px;">
+                                        <h5>{{item.name}}</h5>
+                                    </a>
+                                </td>
+                                <td class="shoping__cart__price">
+                                    {{item.price}} đ
+                                </td>
+                                <td class="shoping__cart__quantity">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input type="text" class="product-qty-{{product_id}}" value="{{item.qty}}">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="shoping__cart__total">
+                                    {% widthratio item.price 1 item.qty %} đ
+                              
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <button type="button" class="btn btn-outline-danger delete-item" data-item={{product_id}}><i class="fas fa-times"></i></button>
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <button type="button" class="btn btn-outline-success update-item" data-item={{product_id}}><i class="fas fa-spinner"></i></button>
+                                </td>
+                            </tr>
+                            
+                            
+                            {% endfor %}
+                         {% else %}
+                         <tr>
+                             <td>
+                                <h5>chưa có sản phẩm trong giỏ hàng của bạn <a href="{% url 'product' %}">click</a> xem sản phẩm</h5>
+                             </td>
+                            
+
+                        </tr>
+                        {% endif %}
+                           
+                        </tbody>
+                        
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    {% comment %} <a href="{% url 'product' %}" class="primary-btn cart-btn">CONTINUE SHOPPING <i class="fas fa-forward"></i></a>
+                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class=""><i class="fas fa-spinner"></i></span>
+                        Upadate Cart</a>  {% endcomment %}
+                </div>
+            </div>
+            <div class="col-lg-6">
+               <div class="shoping__continue">
+                <div class="shoping__checkout">
+                    <a href="{% url 'product' %}" class="primary-btn">Mua Tiếp</a>
+                </div>
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>CỘNG GIỎ HÀNG</h5>
+                    <ul>
+                      
+                        <li>TẠM TÍNH <span>{{total_amt}} đ</span></li>
+                    </ul>
+                    <a href="{% url 'checkout' %}" class="primary-btn">Thanh Toán</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shoping Cart Section End -->
+{% endblock %}

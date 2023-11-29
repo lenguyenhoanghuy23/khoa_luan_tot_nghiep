@@ -1,0 +1,174 @@
+{% extends 'store/main.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Shoping Cart Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %} ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>CHI TIẾT</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'index' %}">Trang Chủ</a>
+                        <span>Chi tiết</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section Begin -->
+
+<section class="product-details spad">
+    <div class="container">
+        {% if messages %}
+        {% for message  in messages  %}
+        <div class="alert alert-primary" role="alert">
+            {{message }}
+            
+          </div>
+        {% endfor %}
+
+        {% endif %}
+        <div class="row">   
+            {% for item in prodel %}
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                src="{{item.img.url}}"style='height:400px' alt="">
+                        </div>
+                        
+                        <div class="product__details__pic__slider owl-carousel">
+                            {% for item in images %}
+                            
+                            <img 
+                            src="{{item.imgs.url}}"  style='height:120px' alt="">
+                            {% endfor %}
+                        </div>
+                  
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3 >{{item.nameProduct}}</h3>
+                        
+                        <div class="product__details__price product-price">{{item.price}}</div>
+                        <p>{{item.description}}</p>
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="number" value="1" id="number">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" class="proID" value="{{item.id}}">
+                        <input type="hidden" class="proname" value="{{item.nameProduct}}">
+                        <input type="hidden" class="pronimg" value="{{item.img.url}}">
+                        <button type="button" class="primary-btn" id ="addtoCartBtn">Thêm Vô Giỏ Hàng</button>
+              
+                        <ul>
+                            <li><b>tình trạng</b>
+                                {% if item.slug > 0 %}
+                                <span>còn hàng</span>
+                                {% else %}
+                                <span>hết hàng</span>
+                                {% endif %} 
+                                
+                            </li>
+                            
+                            <li><b>đơn vị tính</b> <span>{{item.unit}}</span></li>
+                            <li><b>chia sẻ</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">Mô Tả</a>
+                            </li>
+                           
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                    aria-selected="false">Bình Luận <span>(1)</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Thông Tin Sản Phẩm</h6>
+                                    <p>{{item.description}}</p>
+                                </div>
+                            </div>
+                           
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Bình Luận</h6>
+                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
+                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
+                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
+                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
+                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
+                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
+                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
+                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                        Proin eget tortor risus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+            
+    </div>
+</section>
+<!-- Product Details Section End -->
+
+<!-- Related Product Section Begin -->
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>Sản Phẩm Liên Quan</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                {% for item in related_product %}
+                <div class="col-lg-3 col-md-4 col-sm-6 zoom">
+                    <a href="/details/{{item.id}}">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="{{item.img.url}}">
+                               
+                            </div>
+                            <div class="product__item__text">
+                                <h6>{{item.nameProduct}}</h6>
+                                <h5>{{item.price}}đ</h5>
+                            </div>
+                        </div>
+
+                    </a>
+                    
+                </div> 
+                {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- Related Product Section End -->
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'store/main.html' %}
+{% block content %}
+{% load static %}
+ <!-- Blog Details Hero Begin -->
+ {% for item in vblog %}
+<section class="blog-details-hero set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog__details__hero__text">
+                    <h2></h2>
+                    <ul>
+                       <h2>{{item.name}}</h2>
+                        <li>{{item.date_at|date:"d/m/Y"}}</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+<!-- Blog Details Hero End --> 
+
+<!-- Blog Details Section Begin -->
+<section class="blog-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 order-md-1 order-2">
+                
+            </div>
+            {% for item  in vblog %}
+            <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                <div class="blog__details__text">
+                    {% comment %} <img src="{{item.image.url}}" alt=""> {% endcomment %}
+                    <p>{{item.description|safe}}</p>
+                 
+                </div>
+                <div class="blog__details__content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="blog__details__widget">
+                                <ul>
+                                    <li><span>chủ đề:</span> {{item.cateblog}}</li>
+                                   
+                                </ul>
+                                <div class="blog__details__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
+
+<!-- Related Blog Section Begin -->
+<section class="related-blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related-blog-title">
+                    <h2>bài viết khác</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for item in related_product %}
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="{{item.image.url}}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> {{item.date_at|date:"d/m/Y"}}</li>
+                               
+                            </ul>
+                            <h5><a href="#">{{item.name}}</a></h5>
+                            <p>{{item.short_description|truncatechars:150}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+           
+        </div>
+    </div>
+</section>
+<!-- Related Blog Section End -->
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'store/main.html' %}
+{% block content %}
+{% load static %}
+<body>
+
+	<div class="container">
+		<div id="thankyou">
+			<div class="thankyou">
+				
+				<h2>Đặt hàng không thành công</h2>
+				<p></p>
+				<a href="{% url 'index' %}">tiếp tục mua hàng</a>
+				<a href="{% url 'ship' %}">đơn hàng đã đặt</a>
+			</div>
+		</div>
+
+	</div>
+    
+
+</body>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'store/main.html' %}
+{% block content %}
+{% load static%}
+<body>
+	<div class="container">
+		<div id="notfound">
+			<div class="notfound">
+				<div class="notfound-404">
+					<h1>404</h1>
+				</div>
+				
+				<p>Rất tiếc, nội dung này không tồn tại, hoặc đã được thay đổi.
+					Mời bạn quay lại trang chủ để truy cập.</p>
+				<a href="{% url 'index' %}">quay lại trang chủ</a>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock %}
